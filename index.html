@@ -1,40 +1,75 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Создание Telegram-ботов</title>
+    <meta name="description" content="Создаю Telegram-ботов, Mini App и сайты. Примеры работ с кодом на GitHub.">
+    <meta name="theme-color" content="#0b0d12">
+    <title>Telegram-боты и сайты</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="hero">
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a class="brand" href="#top">🤖 <span>dizer1221</span></a>
+            <ul class="nav-links">
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#how">Как я работаю</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+            <a class="btn btn-primary btn-sm" href="https://t.me/Gty9qe" target="_blank" rel="noopener">Написать</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="top">
         <div class="container">
-            <h1>Создаю Telegram-ботов для бизнеса</h1>
-            <p>Боты для записи клиентов, приёма заявок и автоматизации рутины.</p>
-            <a class="btn" href="https://t.me/Gty9qe">Написать мне</a>
+            <span class="badge">Python · aiogram · Telegram Mini App · HTML / CSS / JS</span>
+            <h1>Создаю <span class="grad">Telegram-ботов</span> и сайты для бизнеса</h1>
+            <p class="lead">Боты для записи клиентов и приёма заявок, мини-приложения внутри Telegram и интернет-магазины.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="https://t.me/Gty9qe" target="_blank" rel="noopener">Написать в Telegram</a>
+                <a class="btn btn-ghost" href="#portfolio">Смотреть работы</a>
+            </div>
         </div>
     </header>
 
     <section id="services">
         <div class="container">
             <h2>Услуги</h2>
+            <p class="section-lead">Что я могу сделать для вашего бизнеса</p>
             <div class="cards">
                 <div class="card">
+                    <div class="icon">📇</div>
                     <h3>Бот-визитка</h3>
                     <p>Информация о вас, прайс и контакты в одном чате.</p>
                 </div>
                 <div class="card">
+                    <div class="icon">🗓️</div>
                     <h3>Запись клиентов</h3>
                     <p>Клиенты выбирают время сами, вы получаете уведомления.</p>
                 </div>
                 <div class="card">
+                    <div class="icon">📥</div>
                     <h3>Приём заявок</h3>
                     <p>Бот собирает данные и сразу отправляет их владельцу.</p>
                 </div>
                 <div class="card">
+                    <div class="icon">⏰</div>
                     <h3>Списки и напоминания</h3>
                     <p>Бот хранит данные и напоминает о важном.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">📱</div>
+                    <h3>Telegram Mini App</h3>
+                    <p>Удобные формы и приложения прямо внутри Telegram.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🛒</div>
+                    <h3>Сайты и магазины</h3>
+                    <p>Лендинги и интернет-магазины с каталогом, корзиной и заказом.</p>
                 </div>
             </div>
         </div>
@@ -43,25 +78,51 @@
     <section id="portfolio">
         <div class="container">
             <h2>Портфолио</h2>
-            <div class="cards">
-                <div class="card">
+            <p class="section-lead">Учебные проекты с открытым кодом на GitHub</p>
+            <div class="cards cards-wide">
+
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">aiogram</span>
+                        <span class="tag">SQLite</span>
+                    </div>
                     <h3>Бот «Список задач»</h3>
                     <p>Добавление, отметка выполненных и удаление задач. Данные хранятся в базе, у каждого пользователя свой список.</p>
-                    <a href="https://github.com/dizer1221/todo-telegram-bot">Код на GitHub →</a>
-                </div>                <div class="card">
-                    <h3>Интернет-магазин мебели</h3>
-                    <p>Учебный магазин: каталог с фильтром и фото, корзина с сохранением, форма заказа с проверкой данных и отправкой в Telegram. Чистые HTML, CSS и JavaScript.</p>
-                    <a href="https://dizer1221.github.io/furniture-shop/">Открыть магазин →</a>
-                    <br>
-                    <a href="https://github.com/dizer1221/furniture-shop">Код на GitHub →</a>
-                </div>
-                                <                <div class="card">
+                    <div class="links">
+                        <a class="btn btn-ghost btn-sm" href="https://github.com/dizer1221/todo-telegram-bot" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>
+
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">aiogram</span>
+                        <span class="tag">Mini App</span>
+                        <span class="tag">SQLite</span>
+                    </div>
                     <h3>Бот для барбершопа с Mini App</h3>
                     <p>Онлайн-запись внутри Telegram: клиент выбирает услугу, день и время в мини-приложении. Бот проверяет данные, не допускает двойную запись, сохраняет её в базу и уведомляет владельца.</p>
-                    <a href="https://github.com/dizer1221/barber-telegram-bot">Код на GitHub →</a>
-                    <br>
-                    <a href="https://dizer1221.github.io/barber/">Посмотреть страницу записи →</a>
-                </div>
+                    <div class="links">
+                        <a class="btn btn-primary btn-sm" href="https://dizer1221.github.io/barber/" target="_blank" rel="noopener">Страница записи</a>
+                        <a class="btn btn-ghost btn-sm" href="https://github.com/dizer1221/barber-telegram-bot" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>
+
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <h3>Интернет-магазин мебели</h3>
+                    <p>Учебный магазин: каталог с фильтром и фото, корзина с сохранением, форма заказа с проверкой данных и отправкой в Telegram.</p>
+                    <div class="links">
+                        <a class="btn btn-primary btn-sm" href="https://dizer1221.github.io/furniture-shop/" target="_blank" rel="noopener">Открыть магазин</a>
+                        <a class="btn btn-ghost btn-sm" href="https://github.com/dizer1221/furniture-shop" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>
+
             </div>
         </div>
     </section>
@@ -69,20 +130,21 @@
     <section id="how">
         <div class="container">
             <h2>Как я работаю</h2>
+            <p class="section-lead">Четыре простых шага от идеи до запуска</p>
             <div class="cards">
-                <div class="card">
+                <div class="card step">
                     <span class="num">1</span>
                     <p>Вы описываете задачу</p>
                 </div>
-                <div class="card">
+                <div class="card step">
                     <span class="num">2</span>
                     <p>Я называю срок и цену</p>
                 </div>
-                <div class="card">
+                <div class="card step">
                     <span class="num">3</span>
                     <p>Делаю бота и показываю результат</p>
                 </div>
-                <div class="card">
+                <div class="card step">
                     <span class="num">4</span>
                     <p>Вносим правки и запускаем</p>
                 </div>
@@ -90,10 +152,19 @@
         </div>
     </section>
 
+    <section id="contacts">
+        <div class="container">
+            <div class="cta">
+                <h2>Расскажите о задаче</h2>
+                <p class="section-lead">Напишите в Telegram, и обсудим, чем я могу помочь</p>
+                <a class="btn btn-primary" href="https://t.me/Gty9qe" target="_blank" rel="noopener">@Gty9qe</a>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
-            <h2>Контакты</h2>
-            <p>Telegram: <a href="https://t.me/Gty9qe">@Gty9qe</a></p>
+            <p>© 2026 · Telegram-боты и сайты</p>
         </div>
     </footer>
 
