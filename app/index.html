@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 32px 16px;
+            font-family: system-ui, "Segoe UI", Arial, sans-serif;
+            background: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        p {
+            color: var(--tg-theme-hint-color, #888888);
+        }
+        .counter {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 32px 0;
+        }
+        button {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            margin: 12px auto;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+        }
+        button:active {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Привет, <span id="name">гость</span>!</h1>
+    <p>Это мини-приложение внутри Telegram</p>
+
+    <div class="counter" id="count">0</div>
+
+    <button id="plus">+1</button>
+    <button id="send">Отправить в бот</button>
+
+    <script>
+        // Объект Telegram есть только если страницу открыли внутри Telegram
+        const tg = window.Telegram && window.Telegram.WebApp;
+
+        if (tg) {
+            tg.ready();    // сообщаем Telegram, что страница загрузилась
+            tg.expand();   // растягиваем на весь экран
+
+            const user = tg.initDataUnsafe && tg.initDataUnsafe.user;
+            if (user) {
+                document.getElementById("name").textContent = user.first_name;
+            }
+        }
+
+        let count = 0;
+        const counter = document.getElementById("count");
+
+        document.getElementById("plus").addEventListener("click", () => {
+            count += 1;
+            counter.textContent = count;
+        });
+
+        document.getElementById("send").addEventListener("click", () => {
+            if (tg) {
+                tg.sendData(JSON.stringify({ count: count }));
+            } else {
+                alert("Откройте приложение внутри Telegram");
+            }
+        });
+    </script>
+
+</body>
+</html>
