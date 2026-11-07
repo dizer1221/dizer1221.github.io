@@ -1,707 +1,215 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Стоматология «Белая линия» — лечение зубов без боли</title>
-  <meta name="description" content="Стоматологическая клиника «Белая линия»: лечение, гигиена, отбеливание, имплантация и элайнеры. Бесплатная консультация.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    /* ===== Цвета и базовые настройки ===== */
-    :root {
-      --bg: #FFFFFF;
-      --soft: #F1F7F7;      /* светлая мятная подложка */
-      --ink: #0F2A2E;       /* основной текст */
-      --muted: #52676B;     /* второстепенный текст */
-      --accent: #0E7C7B;    /* бирюзовый акцент */
-      --accent-dark: #0A5F5E;
-      --accent-soft: #D7EEEC;
-      --line: #DCE7E8;
-      --radius: 20px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'Manrope', system-ui, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    h1, h2, h3, p { margin: 0; }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    section { padding: 96px 0; }
-    .section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; max-width: 640px; }
-    .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-    .section-title { font-size: clamp(30px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
-    .section-lead { font-size: 18px; color: var(--muted); }
-
-    /* ===== Кнопки ===== */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      height: 52px; padding: 0 28px; border-radius: 14px;
-      font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
-      transition: background .2s, color .2s, border-color .2s, transform .15s;
-    }
-    .btn:active { transform: scale(0.97); }
-    .btn-primary { background: var(--accent); color: #fff; border: none; }
-    .btn-primary:hover { background: var(--accent-dark); }
-    .btn-outline { background: #fff; color: var(--ink); border: 1.5px solid var(--line); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-    .btn-small { height: 44px; padding: 0 20px; border-radius: 12px; font-size: 15px; }
-
-    /* ===== Шапка ===== */
-    .header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,0.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
-    .logo-mark { width: 36px; height: 36px; border-radius: 10px; background: var(--accent); display: grid; place-items: center; }
-    .nav { display: flex; align-items: center; gap: 28px; font-size: 15px; font-weight: 600; }
-    .nav a:not(.btn) { text-decoration: none; color: var(--muted); }
-    .nav a:not(.btn):hover { color: var(--accent); }
-    .phone { font-weight: 700; color: var(--ink) !important; white-space: nowrap; }
-    .burger { display: none; width: 44px; height: 44px; border: none; background: transparent; cursor: pointer; color: var(--ink); }
-
-    /* ===== Первый экран ===== */
-    .hero { padding: 56px 0 96px; background: linear-gradient(180deg, var(--soft) 0%, #fff 100%); }
-    .hero-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 56px; }
-    .hero-text { flex: 1 1 440px; display: flex; flex-direction: column; gap: 24px; }
-    .badge { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-dark); font-size: 14px; font-weight: 700; }
-    .hero h1 { font-size: clamp(38px, 5vw, 60px); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
-    .hero h1 span { color: var(--accent); }
-    .hero-lead { font-size: 18px; color: var(--muted); max-width: 500px; }
-    .hero-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-    .hero-list li { display: flex; align-items: center; gap: 12px; font-weight: 600; }
-    .check { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
-    .hero-buttons { display: flex; flex-wrap: wrap; gap: 16px; }
-    .hero-photo { flex: 1 1 420px; position: relative; }
-    .hero-photo img { width: 100%; height: 520px; object-fit: cover; border-radius: 28px; background: var(--accent-soft); }
-    .hero-card {
-      position: absolute; left: -24px; bottom: 32px;
-      display: flex; align-items: center; gap: 14px;
-      padding: 16px 20px; border-radius: 18px; background: #fff;
-      box-shadow: 0 16px 40px rgba(15, 42, 46, 0.12);
-    }
-    .hero-card .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); display: grid; place-items: center; }
-    .hero-card strong { display: block; font-size: 15px; }
-    .hero-card span { font-size: 13px; color: var(--muted); }
-
-    /* ===== Услуги ===== */
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-    .service {
-      display: flex; flex-direction: column; border-radius: var(--radius); overflow: hidden;
-      background: #fff; border: 1px solid var(--line);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .service:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15, 42, 46, 0.08); }
-    .service img { width: 100%; height: 200px; object-fit: cover; background: var(--accent-soft); }
-    .service-body { display: flex; flex-direction: column; gap: 10px; padding: 24px; flex: 1; }
-    .service h3 { font-size: 20px; font-weight: 700; }
-    .service p { color: var(--muted); flex: 1; }
-    .service-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
-    .service-price { font-size: 18px; font-weight: 800; }
-    .service-price small { font-size: 14px; font-weight: 600; color: var(--muted); }
-    .link-btn { background: none; border: none; padding: 8px 0; font: inherit; font-weight: 700; color: var(--accent); cursor: pointer; }
-    .link-btn:hover { color: var(--accent-dark); text-decoration: underline; }
-
-    /* ===== Преимущества ===== */
-    .why { background: var(--soft); }
-    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
-    .why-item { display: flex; flex-direction: column; gap: 14px; padding: 28px; border-radius: var(--radius); background: #fff; }
-    .why-item .icon { width: 52px; height: 52px; border-radius: 14px; background: var(--accent-soft); display: grid; place-items: center; }
-    .why-item h3 { font-size: 18px; font-weight: 700; }
-    .why-item p { color: var(--muted); font-size: 15px; }
-
-    /* ===== Прайс ===== */
-    .price-wrap { display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start; }
-    .price-wrap .section-head { flex: 1 1 320px; margin-bottom: 0; }
-    .price-box { flex: 2 1 520px; min-width: 0; }
-    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .tab {
-      height: 44px; padding: 0 18px; border-radius: 12px;
-      border: 1.5px solid var(--line); background: #fff; color: var(--ink);
-      font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
-    }
-    .tab:hover { border-color: var(--accent); }
-    .tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .price-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-    .price-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
-    .price-list .name { font-weight: 600; }
-    .price-list .value { font-weight: 800; white-space: nowrap; }
-    .price-note { margin-top: 16px; font-size: 14px; color: var(--muted); }
-
-    /* ===== Клиника (галерея) ===== */
-    .gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
-    .gallery img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; border-radius: var(--radius); background: var(--accent-soft); }
-    .gallery-side { display: grid; gap: 24px; }
-
-    /* ===== Врачи ===== */
-    .doctors { background: var(--soft); }
-    .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
-    .doctor { display: flex; flex-direction: column; gap: 16px; padding: 28px; border-radius: var(--radius); background: #fff; }
-    .avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 24px; font-weight: 800; }
-    .doctor h3 { font-size: 18px; font-weight: 700; }
-    .doctor .role { color: var(--accent); font-weight: 700; font-size: 15px; }
-    .doctor p { color: var(--muted); font-size: 15px; }
-
-    /* ===== Вопросы ===== */
-    .faq { display: flex; flex-direction: column; gap: 12px; max-width: 840px; }
-    .faq details { border: 1px solid var(--line); border-radius: 16px; padding: 0 24px; background: #fff; }
-    .faq details[open] { border-color: var(--accent); }
-    .faq summary {
-      list-style: none; cursor: pointer; padding: 20px 0;
-      display: flex; justify-content: space-between; align-items: center; gap: 16px;
-      font-size: 17px; font-weight: 700;
-    }
-    .faq summary::-webkit-details-marker { display: none; }
-    .faq summary .plus { flex-shrink: 0; transition: transform .2s; color: var(--accent); }
-    .faq details[open] .plus { transform: rotate(45deg); }
-    .faq details p { padding-bottom: 20px; color: var(--muted); }
-
-    /* ===== Запись ===== */
-    .booking-section { padding-top: 0; }
-    .booking-box { display: flex; flex-wrap: wrap; gap: 48px; padding: 56px; border-radius: 32px; background: var(--ink); color: #fff; }
-    .booking-info { flex: 1 1 340px; display: flex; flex-direction: column; gap: 20px; }
-    .booking-info .section-title { color: #fff; }
-    .booking-info .section-lead { color: #B9CDCF; }
-    .contact-line { display: flex; align-items: center; gap: 12px; color: #E3EEEF; }
-    .contact-line .icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: rgba(255,255,255,0.08); display: grid; place-items: center; }
-    .form { flex: 1 1 400px; display: flex; flex-direction: column; gap: 16px; padding: 32px; border-radius: 24px; background: #fff; color: var(--ink); }
-    .field { display: flex; flex-direction: column; gap: 6px; }
-    .field label { font-size: 14px; font-weight: 600; }
-    .field input, .field select {
-      height: 50px; padding: 0 16px; border: 1.5px solid var(--line); border-radius: 12px;
-      background: #fff; font: inherit; color: var(--ink);
-    }
-    .field input:focus, .field select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-    .row { display: flex; gap: 16px; }
-    .row .field { flex: 1; min-width: 0; }
-    .consent { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--muted); }
-    .consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
-    .form .btn { width: 100%; }
-    .error { color: #B42318; font-size: 13px; display: none; }
-    .field.invalid input { border-color: #B42318; }
-    .field.invalid .error { display: block; }
-
-    /* ===== Подвал ===== */
-    .footer { padding: 40px 0; border-top: 1px solid var(--line); }
-    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px; color: var(--muted); }
-    .disclaimer { margin-top: 24px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; text-align: center; }
-
-    /* ===== Уведомление ===== */
-    .toast {
-      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 120px);
-      padding: 14px 20px; border-radius: 14px; background: var(--ink); color: #fff; font-weight: 600;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.2); transition: transform .3s, opacity .3s; z-index: 50;
-      opacity: 0; pointer-events: none;
-    }
-    .toast.show { transform: translate(-50%, 0); opacity: 1; }
-
-    /* ===== Анимация появления ===== */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ===== Планшеты и телефоны ===== */
-    @media (max-width: 960px) {
-      .nav .phone { display: none; }
-    }
-    @media (max-width: 820px) {
-      .burger { display: inline-flex; align-items: center; justify-content: center; }
-      .nav {
-        display: none; position: absolute; top: 76px; left: 0; right: 0;
-        flex-direction: column; align-items: stretch; gap: 4px;
-        padding: 16px 24px 24px; background: #fff; border-bottom: 1px solid var(--line);
-      }
-      .nav.open { display: flex; }
-      .nav a:not(.btn) { padding: 12px 0; font-size: 18px; color: var(--ink); }
-      .nav .phone { display: block; }
-      section { padding: 64px 0; }
-      .hero { padding: 32px 0 64px; }
-      .hero-photo img { height: 340px; }
-      .hero-card { left: 16px; bottom: 16px; }
-      .gallery { grid-template-columns: 1fr; }
-      .booking-box { padding: 24px; gap: 32px; }
-      .form { padding: 24px; }
-      .row { flex-direction: column; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Создаю Telegram-ботов, Mini App и сайты. Примеры работ с кодом на GitHub.">
+    <meta name="theme-color" content="#0b0d12">
+    <title>Telegram-боты и сайты</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ===== Шапка ===== -->
-  <header class="header">
-    <div class="container header-inner">
-      <a href="#top" class="logo">
-        <span class="logo-mark">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2.5 0-4 2-4 4.5 0 3 1.5 4.5 2 7.5.5 3 1 6 2.5 6s1.5-4 3-4h3c1.5 0 1.5 4 3 4s2-3 2.5-6c.5-3 2-4.5 2-7.5C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3z"/></svg>
-        </span>
-        Белая линия
-      </a>
-      <nav class="nav" id="nav">
-        <a href="#services">Услуги</a>
-        <a href="#prices">Цены</a>
-        <a href="#doctors">Врачи</a>
-        <a href="#faq">Вопросы</a>
-        <a href="tel:+70000000000" class="phone">[ТЕЛЕФОН]</a>
-        <a href="#booking" class="btn btn-primary btn-small">Записаться</a>
-      </nav>
-      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </div>
-  </header>
-
-  <main id="top">
-    <!-- ===== Первый экран ===== -->
-    <div class="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <span class="badge">Первичная консультация — бесплатно</span>
-          <h1>Лечим зубы <span>без боли</span> и страха</h1>
-          <p class="hero-lead">Современная стоматология для всей семьи: от профессиональной чистки до имплантации. Объясняем каждый шаг и называем цену до начала лечения.</p>
-          <ul class="hero-list">
-            <li><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Лечение под современной анестезией</li>
-            <li><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Фиксированная цена в плане лечения</li>
-            <li><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Работаем без выходных</li>
-          </ul>
-          <div class="hero-buttons">
-            <a href="#booking" class="btn btn-primary">Записаться на приём</a>
-            <a href="#prices" class="btn btn-outline">Смотреть цены</a>
-          </div>
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a class="brand" href="#top">🤖 <span>dizer1221</span></a>
+            <ul class="nav-links">
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#how">Как я работаю</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+            <a class="btn btn-primary btn-sm" href="https://t.me/Gty9qe" target="_blank" rel="noopener">Написать</a>
         </div>
-        <div class="hero-photo">
-          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1100&q=80" alt="Светлый кабинет стоматологии с креслом">
-          <div class="hero-card">
-            <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E7C7B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
-            <div>
-              <strong>Гарантия на лечение</strong>
-              <span>Указываем срок в договоре</span>
+    </nav>
+
+    <header class="hero" id="top">
+        <div class="container">
+            <span class="badge">Python · aiogram · Telegram Mini App · HTML / CSS / JS</span>
+            <h1>Создаю <span class="grad">Telegram-ботов</span> и сайты для бизнеса</h1>
+            <p class="lead">Боты для записи клиентов и приёма заявок, мини-приложения внутри Telegram и интернет-магазины.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="https://t.me/Gty9qe" target="_blank" rel="noopener">Написать в Telegram</a>
+                <a class="btn btn-ghost" href="#portfolio">Смотреть работы</a>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
+    </header>
 
-    <!-- ===== Услуги ===== -->
     <section id="services">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Услуги</span>
-          <h2 class="section-title">Всё для здоровой улыбки в одной клинике</h2>
+        <div class="container">
+            <h2>Услуги</h2>
+            <p class="section-lead">Что я могу сделать для вашего бизнеса</p>
+            <div class="cards">
+                <div class="card">
+                    <div class="icon">📇</div>
+                    <h3>Бот-визитка</h3>
+                    <p>Информация о вас, прайс и контакты в одном чате.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🗓️</div>
+                    <h3>Запись клиентов</h3>
+                    <p>Клиенты выбирают время сами, вы получаете уведомления.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">📥</div>
+                    <h3>Приём заявок</h3>
+                    <p>Бот собирает данные и сразу отправляет их владельцу.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">⏰</div>
+                    <h3>Списки и напоминания</h3>
+                    <p>Бот хранит данные и напоминает о важном.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">📱</div>
+                    <h3>Telegram Mini App</h3>
+                    <p>Удобные формы и приложения прямо внутри Telegram.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🛒</div>
+                    <h3>Сайты и магазины</h3>
+                    <p>Лендинги и интернет-магазины с каталогом, корзиной и заказом.</p>
+                </div>
+            </div>
         </div>
-        <!-- Карточки создаются из списка SERVICES в скрипте внизу -->
-        <div class="services-grid" id="services-grid"></div>
-      </div>
     </section>
 
-    <!-- ===== Почему мы ===== -->
-    <section class="why">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Почему мы</span>
-          <h2 class="section-title">К нам не страшно идти</h2>
+    <section id="portfolio">
+        <div class="container">
+            <h2>Портфолио</h2>
+            <p class="section-lead">Учебные проекты с открытым кодом на GitHub</p>
+            <div class="cards cards-wide">
+
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">aiogram</span>
+                        <span class="tag">SQLite</span>
+                    </div>
+                    <h3>Бот «Список задач»</h3>
+                    <p>Добавление, отметка выполненных и удаление задач. Данные хранятся в базе, у каждого пользователя свой список.</p>
+                    <div class="links">
+                        <a class="btn btn-ghost btn-sm" href="https://github.com/dizer1221/todo-telegram-bot" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>
+
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">aiogram</span>
+                        <span class="tag">Mini App</span>
+                        <span class="tag">SQLite</span>
+                    </div>
+                    <h3>Бот для барбершопа с Mini App</h3>
+                    <p>Онлайн-запись внутри Telegram: клиент выбирает услугу, день и время в мини-приложении. Бот проверяет данные, не допускает двойную запись, сохраняет её в базу и уведомляет владельца.</p>
+                    <div class="links">
+                        <a class="btn btn-primary btn-sm" href="https://dizer1221.github.io/barber/" target="_blank" rel="noopener">Страница записи</a>
+                        <a class="btn btn-ghost btn-sm" href="https://github.com/dizer1221/barber-telegram-bot" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>
+
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <h3>Интернет-магазин мебели</h3>
+                    <p>Учебный магазин: каталог с фильтром и фото, корзина с сохранением, форма заказа с проверкой данных и отправкой в Telegram.</p>
+                    <div class="links">
+                        <a class="btn btn-primary btn-sm" href="https://dizer1221.github.io/furniture-shop/" target="_blank" rel="noopener">Открыть магазин</a>
+                        <a class="btn btn-ghost btn-sm" href="https://github.com/dizer1221/furniture-shop" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>
+
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">Дизайн</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <h3>Лендинг кофейни «Зерно»</h3>
+                    <p>Продающая страница для кофейни: меню с вкладками и фото, блок преимуществ, контакты и бронирование столика с отправкой заявки в Telegram. Адаптивна под телефоны.</p>
+                    <div class="links">
+                        <a class="btn btn-primary btn-sm" href="https://dizer1221.github.io/coffee-landing/" target="_blank" rel="noopener">Открыть сайт</a>
+                        <a class="btn btn-ghost btn-sm" href="https://github.com/dizer1221/coffee-landing" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>
+
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">Дизайн</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <h3>Сайт стоматологии «Белая линия»</h3>
+                    <p>Сайт клиники: услуги с ценами, прайс с вкладками, врачи, частые вопросы и онлайн-запись с маской телефона и проверкой полей. Заявка выбранной услуги сразу уходит в Telegram.</p>
+                    <div class="links">
+                        <a class="btn btn-primary btn-sm" href="https://dizer1221.github.io/dental-clinic/" target="_blank" rel="noopener">Открыть сайт</a>
+                        <a class="btn btn-ghost btn-sm" href="https://github.com/dizer1221/dental-clinic" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>
+                <article class="card project">
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">aiogram</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">База знаний</span>
+                    </div>
+                    <h3>Бот-консультант онлайн-школы</h3>
+                    <p>Отвечает на вопросы по базе знаний, а если ответа нет, передаёт вопрос оператору: оператор отвечает прямо в Telegram. Статистика, защита от спама, проверка прав.</p>
+                    <div class="links">
+                        <a class="btn btn-primary btn-sm" href="https://github.com/dizer1221/consultant-telegram-bot" target="_blank" rel="noopener">Код на GitHub</a>
+                    </div>
+                </article>                                
+                                        
+            </div>
         </div>
-        <div class="why-grid">
-          <div class="why-item reveal">
-            <span class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E7C7B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></span>
-            <h3>Без боли</h3>
-            <p>Подбираем анестезию индивидуально. Если страшно — скажите, мы никуда не торопимся.</p>
-          </div>
-          <div class="why-item reveal">
-            <span class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E7C7B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
-            <h3>Честный план лечения</h3>
-            <p>Показываем снимки, объясняем варианты и фиксируем стоимость до начала работы.</p>
-          </div>
-          <div class="why-item reveal">
-            <span class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E7C7B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
-            <h3>Удобное время</h3>
-            <p>Принимаем каждый день с утра до вечера, запись онлайн за минуту.</p>
-          </div>
-          <div class="why-item reveal">
-            <span class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E7C7B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
-            <h3>Точная диагностика</h3>
-            <p>Компьютерная томография и прицельные снимки прямо в клинике.</p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- ===== Цены ===== -->
-    <section id="prices">
-      <div class="container price-wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">Цены</span>
-          <h2 class="section-title">Прозрачные цены без сюрпризов</h2>
-          <p class="section-lead">Точную стоимость врач назовёт после осмотра и зафиксирует её в плане лечения.</p>
+    <section id="how">
+        <div class="container">
+            <h2>Как я работаю</h2>
+            <p class="section-lead">Четыре простых шага от идеи до запуска</p>
+            <div class="cards">
+                <div class="card step">
+                    <span class="num">1</span>
+                    <p>Вы описываете задачу</p>
+                </div>
+                <div class="card step">
+                    <span class="num">2</span>
+                    <p>Я называю срок и цену</p>
+                </div>
+                <div class="card step">
+                    <span class="num">3</span>
+                    <p>Делаю проект и показываю результат</p>
+                </div>
+                <div class="card step">
+                    <span class="num">4</span>
+                    <p>Вносим правки и запускаем</p>
+                </div>
+            </div>
         </div>
-        <div class="price-box">
-          <div class="tabs" role="tablist" id="price-tabs">
-            <button class="tab active" data-group="therapy" role="tab" aria-selected="true">Лечение</button>
-            <button class="tab" data-group="hygiene" role="tab" aria-selected="false">Гигиена</button>
-            <button class="tab" data-group="implant" role="tab" aria-selected="false">Имплантация</button>
-            <button class="tab" data-group="ortho" role="tab" aria-selected="false">Исправление прикуса</button>
-          </div>
-          <ul class="price-list" id="price-list"></ul>
-          <p class="price-note">Цены указаны для примера.</p>
-        </div>
-      </div>
     </section>
 
-    <!-- ===== Клиника ===== -->
-    <section style="padding-top: 0;">
-      <div class="container">
-        <div class="gallery reveal">
-          <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?auto=format&fit=crop&w=1200&q=80" alt="Врачи-стоматологи проводят лечение" loading="lazy">
-          <div class="gallery-side">
-            <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=700&q=80" alt="Стоматологическое кресло в кабинете" loading="lazy">
-            <img src="https://images.unsplash.com/photo-1728342057953-94bfad8f0e7e?auto=format&fit=crop&w=700&q=80" alt="Кабинет с креслом у окна" loading="lazy">
-          </div>
+    <section id="contacts">
+        <div class="container">
+            <div class="cta">
+                <h2>Расскажите о задаче</h2>
+                <p class="section-lead">Напишите в Telegram, и обсудим, чем я могу помочь</p>
+                <a class="btn btn-primary" href="https://t.me/Gty9qe" target="_blank" rel="noopener">@Gty9qe</a>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- ===== Врачи ===== -->
-    <section class="doctors" id="doctors">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Команда</span>
-          <h2 class="section-title">Наши врачи</h2>
-          <p class="section-lead">Сюда клиника добавит фотографии и опыт своих специалистов.</p>
+    <footer>
+        <div class="container">
+            <p>© 2026 · Telegram-боты и сайты</p>
         </div>
-        <div class="doctors-grid">
-          <div class="doctor reveal">
-            <div class="avatar">АС</div>
-            <div>
-              <h3>Анна Соколова</h3>
-              <span class="role">Стоматолог-терапевт</span>
-            </div>
-            <p>Лечение кариеса и каналов, художественная реставрация зубов.</p>
-          </div>
-          <div class="doctor reveal">
-            <div class="avatar">ДМ</div>
-            <div>
-              <h3>Дмитрий Морозов</h3>
-              <span class="role">Хирург-имплантолог</span>
-            </div>
-            <p>Удаление зубов любой сложности, установка имплантов.</p>
-          </div>
-          <div class="doctor reveal">
-            <div class="avatar">ЕК</div>
-            <div>
-              <h3>Елена Кузнецова</h3>
-              <span class="role">Ортодонт</span>
-            </div>
-            <p>Исправление прикуса брекетами и элайнерами у детей и взрослых.</p>
-          </div>
-          <div class="doctor reveal">
-            <div class="avatar">ИП</div>
-            <div>
-              <h3>Ирина Павлова</h3>
-              <span class="role">Гигиенист</span>
-            </div>
-            <p>Профессиональная чистка, отбеливание и обучение уходу за зубами.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- ===== Вопросы ===== -->
-    <section id="faq">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Вопросы</span>
-          <h2 class="section-title">Часто спрашивают</h2>
-        </div>
-        <div class="faq">
-          <details>
-            <summary>Больно ли лечить зубы?<svg class="plus" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
-            <p>Нет. Перед лечением врач делает анестезию, а место укола предварительно обезболивает гелем. Большинство пациентов чувствуют только лёгкое давление.</p>
-          </details>
-          <details>
-            <summary>Сколько стоит первая консультация?<svg class="plus" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
-            <p>Первичный осмотр и консультация бесплатны. Врач осмотрит зубы, при необходимости направит на снимок и составит план лечения с ценой.</p>
-          </details>
-          <details>
-            <summary>Можно ли оплатить лечение частями?<svg class="plus" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
-            <p>Да, большой план лечения можно разбить на этапы и оплачивать каждый этап отдельно. Подробности расскажет администратор.</p>
-          </details>
-          <details>
-            <summary>Лечите ли вы детей?<svg class="plus" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
-            <p>Да, принимаем детей с трёх лет. Первый визит проводим в игровой форме, чтобы ребёнок привык к врачу и не боялся.</p>
-          </details>
-          <details>
-            <summary>Как подготовиться к приёму?<svg class="plus" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
-            <p>Специальная подготовка не нужна. Возьмите паспорт и, если есть, прошлые снимки зубов. Приходите за 10 минут, чтобы заполнить анкету.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Запись ===== -->
-    <section class="booking-section" id="booking">
-      <div class="container">
-        <div class="booking-box">
-          <div class="booking-info">
-            <span class="eyebrow" style="color: #7FD1CC;">Запись на приём</span>
-            <h2 class="section-title">Запишитесь на бесплатную консультацию</h2>
-            <p class="section-lead">Оставьте заявку, и администратор перезвонит в течение 15 минут, чтобы подобрать удобное время.</p>
-            <div class="contact-line">
-              <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FD1CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-              <span>[АДРЕС КЛИНИКИ]</span>
-            </div>
-            <div class="contact-line">
-              <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FD1CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
-              <span>Ежедневно с 9:00 до 21:00</span>
-            </div>
-            <div class="contact-line">
-              <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7FD1CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>
-              <span>[ТЕЛЕФОН]</span>
-            </div>
-          </div>
-
-          <form class="form" id="booking-form" novalidate>
-            <div class="field" id="field-name">
-              <label for="name">Ваше имя</label>
-              <input type="text" id="name" placeholder="Например, Мария" autocomplete="name">
-              <span class="error">Введите имя</span>
-            </div>
-            <div class="field" id="field-phone">
-              <label for="phone">Телефон</label>
-              <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
-              <span class="error">Введите номер полностью</span>
-            </div>
-            <div class="field">
-              <label for="service">Услуга</label>
-              <select id="service"></select>
-            </div>
-            <div class="row">
-              <div class="field">
-                <label for="date">Желаемая дата</label>
-                <input type="date" id="date">
-              </div>
-              <div class="field">
-                <label for="time">Время</label>
-                <select id="time">
-                  <option>Любое</option>
-                  <option>Утро (9:00–12:00)</option>
-                  <option>День (12:00–17:00)</option>
-                  <option>Вечер (17:00–21:00)</option>
-                </select>
-              </div>
-            </div>
-            <label class="consent">
-              <input type="checkbox" id="consent" checked>
-              <span>Согласен на обработку персональных данных</span>
-            </label>
-            <button type="submit" class="btn btn-primary">Отправить заявку</button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== Подвал ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <span>© 2026 Стоматология «Белая линия»</span>
-        <span>Лицензия: [НОМЕР ЛИЦЕНЗИИ]</span>
-      </div>
-      <p class="disclaimer">Имеются противопоказания. Необходима консультация специалиста.</p>
-    </div>
-  </footer>
-
-  <div class="toast" id="toast" role="status"></div>
-
-  <script>
-    // ===== Настройки =====
-    // Telegram-ник клиники (без @), куда будут приходить заявки
-    const TELEGRAM_USERNAME = 'Gty9qe';
-
-    const IMG = (id, w = 700) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
-
-    // ===== Услуги: меняй здесь =====
-    const SERVICES = [
-      { name: 'Лечение кариеса', desc: 'Пломба из светоотверждаемого материала, которая не отличается от родного зуба.', price: 'от 3 500 ₽', photo: IMG('1606811971618-4486d14f3f99') },
-      { name: 'Профессиональная чистка', desc: 'Ультразвук и Air Flow: убираем камень и налёт, зубы становятся светлее.', price: 'от 4 000 ₽', photo: IMG('1681939278218-a755fb2bf2d3') },
-      { name: 'Отбеливание', desc: 'Безопасное отбеливание в кабинете — зубы светлее на несколько тонов за один визит.', price: 'от 15 000 ₽', photo: IMG('1677026010083-78ec7f1b84ed') },
-      { name: 'Имплантация', desc: 'Восстанавливаем потерянные зубы на имплантах с гарантией.', price: 'от 35 000 ₽', photo: IMG('1663755489920-5e09f66d011a') },
-      { name: 'Элайнеры', desc: 'Прозрачные капы для исправления прикуса — незаметны для окружающих.', price: 'от 120 000 ₽', photo: IMG('1777793636393-a0fec488f3fb') },
-      { name: 'Консультация и диагностика', desc: 'Осмотр, снимки и понятный план лечения с ценами.', price: 'Бесплатно', photo: IMG('1681939282781-341ac4f61996') },
-    ];
-
-    // ===== Прайс: меняй здесь =====
-    const PRICES = {
-      therapy: [
-        ['Лечение поверхностного кариеса', '3 500 ₽'],
-        ['Лечение среднего кариеса', '4 500 ₽'],
-        ['Лечение пульпита (1 канал)', '7 000 ₽'],
-        ['Художественная реставрация зуба', '8 000 ₽'],
-        ['Анестезия', '600 ₽'],
-      ],
-      hygiene: [
-        ['Профессиональная чистка (Air Flow + ультразвук)', '4 000 ₽'],
-        ['Фторирование зубов', '1 500 ₽'],
-        ['Отбеливание в кабинете', '15 000 ₽'],
-        ['Домашнее отбеливание (капы)', '9 000 ₽'],
-      ],
-      implant: [
-        ['Консультация хирурга', 'Бесплатно'],
-        ['Удаление зуба (простое)', '2 500 ₽'],
-        ['Установка импланта', '35 000 ₽'],
-        ['Коронка на имплант', '30 000 ₽'],
-      ],
-      ortho: [
-        ['Консультация ортодонта', 'Бесплатно'],
-        ['Брекеты металлические (одна челюсть)', '45 000 ₽'],
-        ['Брекеты керамические (одна челюсть)', '65 000 ₽'],
-        ['Элайнеры (полный курс)', '120 000 ₽'],
-      ],
-    };
-
-    // ===== Отрисовка услуг =====
-    const grid = document.getElementById('services-grid');
-    const serviceSelect = document.getElementById('service');
-
-    grid.innerHTML = SERVICES.map((s, i) => `
-      <article class="service reveal">
-        <img src="${s.photo}" alt="${s.name}" loading="lazy">
-        <div class="service-body">
-          <h3>${s.name}</h3>
-          <p>${s.desc}</p>
-          <div class="service-foot">
-            <span class="service-price">${s.price}</span>
-            <button class="link-btn" data-index="${i}">Записаться →</button>
-          </div>
-        </div>
-      </article>
-    `).join('');
-
-    serviceSelect.innerHTML = ['Не знаю, нужна консультация', ...SERVICES.map(s => s.name)]
-      .map(name => `<option>${name}</option>`).join('');
-
-    // Кнопка «Записаться» в карточке: выбирает услугу в форме и прокручивает к ней
-    grid.addEventListener('click', (e) => {
-      const btn = e.target.closest('.link-btn');
-      if (!btn) return;
-      serviceSelect.value = SERVICES[btn.dataset.index].name;
-      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => document.getElementById('name').focus({ preventScroll: true }), 600);
-    });
-
-    // ===== Прайс с вкладками =====
-    const priceList = document.getElementById('price-list');
-
-    function renderPrices(group) {
-      priceList.innerHTML = PRICES[group].map(([name, value]) => `
-        <li><span class="name">${name}</span><span class="value">${value}</span></li>
-      `).join('');
-    }
-
-    document.querySelectorAll('#price-tabs .tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('#price-tabs .tab').forEach(t => {
-          t.classList.remove('active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        renderPrices(tab.dataset.group);
-      });
-    });
-
-    renderPrices('therapy');
-
-    // ===== Мобильное меню =====
-    const burger = document.getElementById('burger');
-    const nav = document.getElementById('nav');
-
-    burger.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('open');
-      burger.setAttribute('aria-expanded', isOpen);
-    });
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    }));
-
-    // ===== Маска телефона: +7 (999) 123-45-67 =====
-    const phoneInput = document.getElementById('phone');
-
-    phoneInput.addEventListener('input', () => {
-      let digits = phoneInput.value.replace(/\D/g, '');
-      if (digits.startsWith('8')) digits = '7' + digits.slice(1);
-      if (!digits.startsWith('7')) digits = '7' + digits;
-      digits = digits.slice(0, 11);
-
-      let result = '+7';
-      if (digits.length > 1) result += ' (' + digits.slice(1, 4);
-      if (digits.length >= 4) result += ') ' + digits.slice(4, 7);
-      if (digits.length >= 7) result += '-' + digits.slice(7, 9);
-      if (digits.length >= 9) result += '-' + digits.slice(9, 11);
-      phoneInput.value = result;
-    });
-
-    // ===== Отправка заявки =====
-    const form = document.getElementById('booking-form');
-    const dateInput = document.getElementById('date');
-    dateInput.min = new Date().toISOString().split('T')[0];
-
-    function showToast(text) {
-      const toast = document.getElementById('toast');
-      toast.textContent = text;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value.trim();
-      const phoneDigits = phoneInput.value.replace(/\D/g, '');
-      const fieldName = document.getElementById('field-name');
-      const fieldPhone = document.getElementById('field-phone');
-
-      fieldName.classList.toggle('invalid', name.length < 2);
-      fieldPhone.classList.toggle('invalid', phoneDigits.length !== 11);
-
-      if (name.length < 2 || phoneDigits.length !== 11) return;
-
-      if (!document.getElementById('consent').checked) {
-        showToast('Отметьте согласие на обработку данных');
-        return;
-      }
-
-      const date = dateInput.value ? dateInput.value.split('-').reverse().join('.') : 'любая';
-      const text =
-        `Заявка на приём\n` +
-        `Имя: ${name}\n` +
-        `Телефон: ${phoneInput.value}\n` +
-        `Услуга: ${serviceSelect.value}\n` +
-        `Дата: ${date}\n` +
-        `Время: ${document.getElementById('time').value}`;
-
-      window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(text)}`, '_blank');
-      showToast('Заявка готова — отправьте её в Telegram');
-      form.reset();
-    });
-
-    // ===== Плавное появление блоков =====
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
 </body>
 </html>
